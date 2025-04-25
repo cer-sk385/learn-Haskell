@@ -34,3 +34,10 @@ main = do
       add a b = a + b
 
   print (add 434 871)
+
+  -- 階乗を計算する再帰関数
+  let factorial :: Int -> Int
+      factorial 0 = 1 -- 0を受け取ったら1を返す
+      factorial n = n * factorial (n - 1) -- それ以外の場合はn * (n-1)の階乗を返す
+
+  print (factorial 4)
