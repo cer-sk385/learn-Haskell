@@ -37,7 +37,13 @@ main = do
 
   -- 階乗を計算する再帰関数
   let factorial :: Int -> Int
-      factorial 0 = 1 -- 0を受け取ったら1を返す
+      factorial 0 = 1 -- 0を受け取ったら1を返す（基底ケース）
       factorial n = n * factorial (n - 1) -- それ以外の場合はn * (n-1)の階乗を返す
 
   print (factorial 4)
+
+  -- 総和を計算する再帰関数
+  let sumTest :: Int -> Int
+      sumTest 0 = 0 --（基底ケース）
+      sumTest n = n + sumTest (n-1)
+  print (sumTest 234)
