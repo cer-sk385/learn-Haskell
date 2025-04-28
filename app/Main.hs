@@ -47,3 +47,36 @@ main = do
       sumTest 0 = 0 --（基底ケース）
       sumTest n = n + sumTest (n-1)
   print (sumTest 234)
+
+  -- フィボナッチ数列を再帰関数で実装してみる
+  let fibonacci :: Int -> Int
+      fibonacci 0 = 0
+      fibonacci 1 = 1
+      fibonacci n = fibonacci(n-1) + fibonacci(n-2)
+  print (fibonacci 7)
+  -- print (fibonacci 2239) 計算量が指数関数的に増加してしまって終わらない
+
+--   fibonacci 5
+-- = fibonacci 4 + fibonacci 3
+-- = (fibonacci 3 + fibonacci 2) + (fibonacci 2 + fibonacci 1)
+-- = ((fibonacci 2 + fibonacci 1) + (fibonacci 1 + fibonacci 0)) + ((fibonacci 1 + fibonacci 0) + 1)
+
+  -- 効率的なフィボナッチ数列の実装（理解するだけ）
+  let fibonacciEff :: Int -> Int
+      -- 補助関数を使って、前の2つの数（a, b）を保持しながら計算
+      fibonacciEff num = fib' num 0 1
+        where
+          fib' 0 a _ = a          -- 0の場合はaを返す（_ は使わないので、命名を省略するということを表す　-> 第三引数を無視）
+          fib' 1 _ b = b          -- 1の場合はbを返す（第二引数を無視）
+          fib' m a b = fib' (m-1) b (a+b)  -- それ以外の場合は、次の2数を計算
+
+  -- fibonacciEff 4 = fib' 4 0 1
+  --                ↓
+  --   fib' 4 0 1 = fib' (4-1) 1 (0+1)     -- fib' 3 1 1
+  --   fib' 3 1 1 = fib' (3-1) 1 (1+1)     -- fib' 2 1 2
+  --   fib' 2 1 2 = fib' (2-1) 2 (1+2)     -- fib' 1 2 3
+  --   fib' 1 2 3 = 3                       -- 基底ケース fib' 1 _ b = b が適用
+
+  -- 結果: 3　、つまりフィボナッチ数列の4番目の値（0,1,1,2,3）
+
+  print (fibonacciEff 2239)  -- これなら高速
