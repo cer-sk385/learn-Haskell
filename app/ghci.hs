@@ -1,4 +1,3 @@
-
   -- Haskell 5日目
   -- ghciで対話的に関数を実行してみる。
 
@@ -37,3 +36,9 @@ fibonacciEff num = fib' num 0 1
     fib' 0 a _ = a
     fib' 1 _ b = b
     fib' m a b = fib' (m-1) b (a+b)
+
+-- リストの操作
+doubleList :: [Integer] -> [Integer]
+doubleList [] = []
+doubleList (x:xs) = 2*x : doubleList xs
+
